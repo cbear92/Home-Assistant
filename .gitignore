@@ -1,14 +1,19 @@
-# Blacklist files/folders in same directory as the .gitignore file
-/*
-
-# Whitelist some files
+# Example .gitignore file for your config dir.
+# An * ensures that everything will be ignored.
+*
+# You can whitelist files/folders with !, these will not be ignored.
+!*.yaml
 !.gitignore
-!README.md
-!automations.yaml
-!configuration.yaml
-!groups.yaml
-!scenes.yaml
-!sensors.yaml
-!scripts.yaml
-!blueprints/automation/homeassistant/*
-!blueprints/scripts/homeassistant/*
+!*.md
+
+# Ignore folders.
+.storage
+.cloud
+.google.token
+deps
+tts
+
+# Ensure these YAML files are ignored, otherwise your secret data/credentials will leak.
+ip_bans.yaml
+secrets.yaml
+known_devices.yaml
