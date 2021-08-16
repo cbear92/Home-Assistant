@@ -1,0 +1,36 @@
+
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+# Text to speech
+tts:
+  - platform: google_translate
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+sensor: !include sensors.yaml
+
+http:
+  server_port: !secret ha_port
+  ssl_certificate: !secret cf_ssl_cert
+  ssl_key: !secret cf_ssl_key
+  ip_ban_enabled: true
+  login_attempts_threshold: 3
+  use_x_forwarded_for: true
+  trusted_proxies: !include cfip.yaml
+
+logger:
+  
+recorder:
+  db_url: mysql://homeassistant:stoatybear@core-mariadb/homeassistant?charset=utf8mb4
+  
+influxdb:
+  host: !secret base_ip4
+  port: 8086
+  database: homeassistant
+  username: !secret influx_un
+  password: !secret influx_pw
+  max_retries: 3
+  default_measurement: state

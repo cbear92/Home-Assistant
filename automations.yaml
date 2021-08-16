@@ -1,0 +1,14 @@
+- id: '1627392739966'
+  alias: Print Complete
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: sensor.spaghetti_state
+    to: complete
+  condition: []
+  action:
+  - service: notify.mobile_app_pixel_3a
+    data:
+      message: 'Print name: {{ states(''sensor.spaghetti_current_print'') }}'
+      title: Print is Complete
+  mode: single
